@@ -42,25 +42,25 @@
                 {
                     if (item.type == "proc")
                     {
-                        <div class="card mb-3" style="max-width: 540px;">
+                        <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
                             <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="..." alt="...">
+                                <div class="col-md-2">
+                                    <img src="~/images/proc.jpg" alt="..." width="100" height="100">
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-2">
                                     <div class="card-body">
-                                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.name)</h5>
-                                        <p class="card-text">@Html.DisplayFor(modelItem => item.price) руб.</p>
-                                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                        <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
                                     </div>
                                 </div>
+
+                                  <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                       @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                                       @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                                  </div>
+
                             </div>
                         </div>
-
-
-
-
                     }
                 }
         </div>
@@ -82,42 +82,34 @@
             </div>
         </div>
         <div class="container-fluid" id="example_3" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+           
 
-                @foreach (var item in Model)
-                {
-                    if (item.type == "vid")
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
-                    }
-                }
-            </table>
+           @foreach (var item in Model)
+            {
+              if (item.type == "vid")
+               {
+                    <div class="card mb-3" style="margin-top:10px;margin-left: 100px; border-style:solid; border-color:lightgray; border-width:2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/videocard.png" alt="..." width="100" height="100">
+                             </div>
+                        <div class="col-md-2">
+                            <div class="card-body">
+                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                            </div>
+                        </div>
+
+                    <div class="col-md-8" style="text-align: end; margin-top: 26px; ">
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                    </div>
+
+                        </div>
+                    </div>
+              }
+            }
+
         </div>
 
         <div class="container-fluid classAccessories">
@@ -146,42 +138,34 @@
             </div>
         </div>
         <div class="container-fluid" id="DiskNameTable" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+           
 
                 @foreach (var item in Model)
                 {
                     if (item.type == "disc")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
+            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="~/images/disc.png" alt="..." width="100" height="100">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                    </div>
+
+                </div>
+            </div>
                     }
                 }
-            </table>
+            
         </div>
 
         <div class="container-fluid classAccessories">
@@ -210,42 +194,34 @@
             </div>
         </div>
         <div class="container-fluid" id="OZUTable" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+            
 
                 @foreach (var item in Model)
                 {
                     if (item.type == "ozu")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
+            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="~/images/ozu.jpg" alt="..." width="100" height="100">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                    </div>
+
+                </div>
+            </div>
                     }
                 }
-            </table>
+
         </div>
 
 
@@ -275,42 +251,33 @@
             </div>
         </div>
         <div class="container-fluid" id="KulerTable" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+            
 
                 @foreach (var item in Model)
                 {
                     if (item.type == "kuler")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
+            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="~/images/kuler.jpg" alt="..." width="100" height="100">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                    </div>
+
+                </div>
+            </div>
                     }
                 }
-            </table>
         </div>
 
 
@@ -340,42 +307,33 @@
             </div>
         </div>
         <div class="container-fluid" id="KorpusTable" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+            
 
                 @foreach (var item in Model)
                 {
                     if (item.type == "korpus")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
+            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="~/images/korpus.jpg" alt="..." width="100" height="100">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                    </div>
+
+                </div>
+            </div>
                     }
                 }
-            </table>
         </div>
 
 
@@ -405,42 +363,33 @@
             </div>
         </div>
         <div class="container-fluid" id="MonitorTable" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+           
 
                 @foreach (var item in Model)
                 {
                     if (item.type == "monitor")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
+            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="~/images/monitor.jpg" alt="..." width="100" height="100">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                    </div>
+
+                </div>
+            </div>
                     }
                 }
-            </table>
         </div>
 
 
@@ -470,42 +419,34 @@
             </div>
         </div>
         <div class="container-fluid" id="MouseTable" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+            
 
                 @foreach (var item in Model)
                 {
                     if (item.type == "mouse")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
+            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="~/images/mouse.jpg" alt="..." width="100" height="100">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                    </div>
+
+                </div>
+            </div>
                     }
                 }
-            </table>
+            
         </div>
 
         <div class="container-fluid classAccessories" >
@@ -534,44 +475,37 @@
             </div>
         </div>
         <div class="container-fluid" id="KeyboardTable" runat="server" style="display:none">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.price)
-                    </th>
-                    <th></th>
-                </tr>
+
 
                 @foreach (var item in Model)
                 {
                     if (item.type == "keyboard")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.type)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
-                            </td>
-                        </tr>
+                <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="~/images/keyboard.jpg" alt="..." width="100" height="100">
+                        </div>
+                        <div class="col-md-2">
+                            <div class="card-body">
+                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                            @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                        </div>
+
+                    </div>
+                </div>
                     }
                 }
-            </table>
         </div>
 
+
+        
     </div>
 
     @Scripts.Render("~/bundles/jquery")

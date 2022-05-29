@@ -162,6 +162,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\disc.png" />
+    <Content Include="images\keyboard.jpg" />
+    <Content Include="images\korpus.jpg" />
+    <Content Include="images\kuler.jpg" />
+    <Content Include="images\monitor.jpg" />
+    <Content Include="images\mouse.jpg" />
+    <Content Include="images\ozu.jpg" />
+    <Content Include="images\proc.jpg" />
+    <Content Include="images\videocard.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
