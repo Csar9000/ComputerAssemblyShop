@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.classAccessories {
+    margin-top: 20px;
+    height: 40px;
+}

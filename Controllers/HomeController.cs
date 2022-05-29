@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ComputerAssemblyShop;
 
 namespace ComputerAssemblyShop.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ComputerAssemblyEntities db = new ComputerAssemblyEntities();
+        public ActionResult Complectation()
         {
+            ViewBag.Accessory = new SelectList(db.AccessoryTable.ToList(), "Id", "Name");
+
             return View();
         }
 
@@ -17,6 +24,7 @@ namespace ComputerAssemblyShop.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
+            
             return View();
         }
 

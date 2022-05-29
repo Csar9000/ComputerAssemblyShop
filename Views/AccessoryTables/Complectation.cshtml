@@ -1,0 +1,591 @@
+﻿@model IEnumerable<ComputerAssemblyShop.AccessoryTable>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link type="text/css" rel="stylesheet" href="../../Content/Site.css" />
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
+
+
+    <div class="container">
+
+        <h2>Комплектация</h2>
+
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Процессор:
+                </div>
+                <div class="col-lg-9">
+                    @Session["ProcessorName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_2_2" onclick=" document.getElementById('example_2').style.display='none'; document.getElementById('example_2_2').style.display='none'; document.getElementById('example_2_1').style.display='block';" style="display: none; text-align: end">Скрыть</button>
+                    <button class="btn-primary btn-wrapper-end" id="example_2_1" onclick="document.getElementById('example_2').style.display='block'; document.getElementById('example_2_1').style.display='none';  document.getElementById('example_2_2').style.display='block';" style=" text-align:end">Показать</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="example_2" runat="server" style="display:none">
+
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "proc")
+                    {
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.name)</h5>
+                                        <p class="card-text">@Html.DisplayFor(modelItem => item.price) руб.</p>
+                                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    }
+                }
+        </div>
+
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Видеокарта:
+                </div>
+                <div class="col-lg-9">
+                    @Session["VideoCardName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_3_2" onclick=" document.getElementById('example_3').style.display='none'; document.getElementById('example_3_2').style.display='none'; document.getElementById('example_3_1').style.display='block';" style="display: none; text-align: end">Скрыть</button>
+                    <button class="btn-primary btn-wrapper-end" id="example_3_1" onclick="document.getElementById('example_3').style.display='block'; document.getElementById('example_3_1').style.display='none';  document.getElementById('example_3_2').style.display='block';" style=" text-align:end">Показать</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="example_3" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "vid")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Хранилище данных:
+                </div>
+                <div class="col-lg-9">
+                    @Session["DiskName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_4_2" onclick=" document.getElementById('DiskNameTable').style.display = 'none';
+                                    document.getElementById('example_4_2').style.display = 'none';
+                                    document.getElementById('example_4_1').style.display = 'block';"
+                            style="display: none; text-align: end">
+                        Скрыть
+                    </button>
+                    <button class="btn-primary btn-wrapper-end" id="example_4_1" onclick="document.getElementById('DiskNameTable').style.display = 'block';
+                                    document.getElementById('example_4_1').style.display = 'none';
+                                    document.getElementById('example_4_2').style.display = 'block';"
+                            style=" text-align:end">
+                        Показать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="DiskNameTable" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "disc")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Оперативная память:
+                </div>
+                <div class="col-lg-9">
+                    @Session["OZUName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_5_2" onclick=" document.getElementById('OZUTable').style.display = 'none';
+                                    document.getElementById('example_5_2').style.display = 'none';
+                                    document.getElementById('example_5_1').style.display = 'block';"
+                            style="display: none; text-align: end">
+                        Скрыть
+                    </button>
+                    <button class="btn-primary btn-wrapper-end" id="example_5_1" onclick="document.getElementById('OZUTable').style.display = 'block';
+                                    document.getElementById('example_5_1').style.display = 'none';
+                                    document.getElementById('example_5_2').style.display = 'block';"
+                            style=" text-align:end">
+                        Показать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="OZUTable" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "ozu")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Охлаждающая система:
+                </div>
+                <div class="col-lg-9">
+                    @Session["KulerName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_6_2" onclick=" document.getElementById('KulerTable').style.display = 'none';
+                                    document.getElementById('example_6_2').style.display = 'none';
+                                    document.getElementById('example_6_1').style.display = 'block';"
+                            style="display: none; text-align: end">
+                        Скрыть
+                    </button>
+                    <button class="btn-primary btn-wrapper-end" id="example_6_1" onclick="document.getElementById('KulerTable').style.display = 'block';
+                                    document.getElementById('example_6_1').style.display = 'none';
+                                    document.getElementById('example_6_2').style.display = 'block';"
+                            style=" text-align:end">
+                        Показать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="KulerTable" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "kuler")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Корпус:
+                </div>
+                <div class="col-lg-9">
+                    @Session["KorpusName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_7_2" onclick=" document.getElementById('KorpusTable').style.display = 'none';
+                                    document.getElementById('example_7_2').style.display = 'none';
+                                    document.getElementById('example_7_1').style.display = 'block';"
+                            style="display: none; text-align: end">
+                        Скрыть
+                    </button>
+                    <button class="btn-primary btn-wrapper-end" id="example_7_1" onclick="document.getElementById('KorpusTable').style.display = 'block';
+                                    document.getElementById('example_7_1').style.display = 'none';
+                                    document.getElementById('example_7_2').style.display = 'block';"
+                            style=" text-align:end">
+                        Показать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="KorpusTable" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "korpus")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Монитор:
+                </div>
+                <div class="col-lg-9">
+                    @Session["MonitorName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_8_2" onclick=" document.getElementById('MonitorTable').style.display = 'none';
+                                    document.getElementById('example_8_2').style.display = 'none';
+                                    document.getElementById('example_8_1').style.display = 'block';"
+                            style="display: none; text-align: end">
+                        Скрыть
+                    </button>
+                    <button class="btn-primary btn-wrapper-end" id="example_8_1" onclick="document.getElementById('MonitorTable').style.display = 'block';
+                                    document.getElementById('example_8_1').style.display = 'none';
+                                    document.getElementById('example_8_2').style.display = 'block';"
+                            style=" text-align:end">
+                        Показать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="MonitorTable" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "monitor")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+
+        <div class="container-fluid classAccessories">
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Компьютерная мышь:
+                </div>
+                <div class="col-lg-9">
+                    @Session["MouseName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_9_2" onclick=" document.getElementById('MouseTable').style.display = 'none';
+                                    document.getElementById('example_9_2').style.display = 'none';
+                                    document.getElementById('example_9_1').style.display = 'block';"
+                            style="display: none; text-align: end">
+                        Скрыть
+                    </button>
+                    <button class="btn-primary btn-wrapper-end" id="example_9_1" onclick="document.getElementById('MouseTable').style.display = 'block';
+                                    document.getElementById('example_9_1').style.display = 'none';
+                                    document.getElementById('example_9_2').style.display = 'block';"
+                            style=" text-align:end">
+                        Показать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="MouseTable" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "mouse")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+        <div class="container-fluid classAccessories" >
+            <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
+                <div class="col-lg-2">
+                    Клавиатура:
+                </div>
+                <div class="col-lg-9">
+                    @Session["KeyboardName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="btn-primary btn-wrapper-end" id="example_10_2" onclick=" document.getElementById('KeyboardTable').style.display = 'none';
+                                    document.getElementById('example_10_2').style.display = 'none';
+                                    document.getElementById('example_10_1').style.display = 'block';"
+                            style="display: none; text-align: end">
+                        Скрыть
+                    </button>
+                    <button class="btn-primary btn-wrapper-end" id="example_10_1" onclick="document.getElementById('KeyboardTable').style.display = 'block';
+                                    document.getElementById('example_10_1').style.display = 'none';
+                                    document.getElementById('example_10_2').style.display = 'block';"
+                            style=" text-align:end">
+                        Показать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="KeyboardTable" runat="server" style="display:none">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.type == "keyboard")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary", @style = "color:white" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script language="javascript">
+         function toggleText(id) {
+                document.getElementById(id).textContent = 'блаблаблабла';
+         }
+        document.getElementById('button').addEventListener('click', () => toggleText('p'));
+
+    </script>
+    
+</body>
+
+
