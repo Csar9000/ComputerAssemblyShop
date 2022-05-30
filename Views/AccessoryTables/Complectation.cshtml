@@ -6,73 +6,107 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link type="text/css" rel="stylesheet" href="../../Content/Site.css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
 
+    <div id="modDialog" class="modal fade">
+        <div id="dialogContent" class="modal-dialog"></div>
+    </div>
 
     <div class="container">
 
         <h2>Комплектация</h2>
 
-
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Процессор:
+                   <h5>Процессор:</h5>
                 </div>
-                <div class="col-lg-9">
-                    @Session["ProcessorName"]
+                <div class="col-lg-7">
+                    <h5> @Session["ProcessorName"]</h5>
                 </div>
 
+                <div class="col-lg-1">
+                    <h5>@Session["ProcPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["procId"] == null || @Session["procId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["procId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
+                </div>
                 <div class="col-lg-1">
                     <button class="btn-primary btn-wrapper-end" id="example_2_2" onclick=" document.getElementById('example_2').style.display='none'; document.getElementById('example_2_2').style.display='none'; document.getElementById('example_2_1').style.display='block';" style="display: none; text-align: end">Скрыть</button>
                     <button class="btn-primary btn-wrapper-end" id="example_2_1" onclick="document.getElementById('example_2').style.display='block'; document.getElementById('example_2_1').style.display='none';  document.getElementById('example_2_2').style.display='block';" style=" text-align:end">Показать</button>
                 </div>
+
+
+
+
             </div>
         </div>
         <div class="container-fluid" id="example_2" runat="server" style="display:none">
 
 
-                @foreach (var item in Model)
+            @foreach (var item in Model)
+            {
+                if (item.type == "proc")
                 {
-                    if (item.type == "proc")
-                    {
-                        <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                            <div class="row g-0">
-                                <div class="col-md-2">
-                                    <img src="~/images/proc.jpg" alt="..." width="100" height="100">
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="card-body">
-                                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                                        <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
-                                    </div>
-                                </div>
-
-                                  <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                                       @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                                       @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                                  </div>
-
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/proc.jpg" alt="..." width="100" height="100">
                             </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
+
                         </div>
-                    }
+                    </div>
                 }
+            }
         </div>
 
 
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Видеокарта:
+                    <h5>Видеокарта:</h5>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["VideoCardName"]
+
+                    
+                </div>
+
+                <div class="col-lg-1">
+                    <h5>@Session["VideoCardPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["vidId"] == null || @Session["vidId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["vidId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -82,32 +116,32 @@
             </div>
         </div>
         <div class="container-fluid" id="example_3" runat="server" style="display:none">
-           
 
-           @foreach (var item in Model)
+
+            @foreach (var item in Model)
             {
-              if (item.type == "vid")
-               {
+                if (item.type == "vid")
+                {
                     <div class="card mb-3" style="margin-top:10px;margin-left: 100px; border-style:solid; border-color:lightgray; border-width:2px; border-radius: 4px;">
                         <div class="row g-0">
                             <div class="col-md-2">
                                 <img src="~/images/videocard.png" alt="..." width="100" height="100">
-                             </div>
-                        <div class="col-md-2">
-                            <div class="card-body">
-                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                                <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
                             </div>
-                        </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
 
-                    <div class="col-md-8" style="text-align: end; margin-top: 26px; ">
-                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                    </div>
+                            <div class="col-md-8" style="text-align: end; margin-top: 26px; ">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
 
                         </div>
                     </div>
-              }
+                }
             }
 
         </div>
@@ -115,10 +149,24 @@
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Хранилище данных:
+                    <h5>Хранилище данных:</h5>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["DiskName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <h5>@Session["DiskPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["discId"] == null || @Session["discId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["discId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -138,43 +186,56 @@
             </div>
         </div>
         <div class="container-fluid" id="DiskNameTable" runat="server" style="display:none">
-           
 
-                @foreach (var item in Model)
+
+            @foreach (var item in Model)
+            {
+                if (item.type == "disc")
                 {
-                    if (item.type == "disc")
-                    {
-            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="~/images/disc.png" alt="..." width="100" height="100">
-                    </div>
-                    <div class="col-md-2">
-                        <div class="card-body">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/disc.png" alt="..." width="100" height="100">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
+
                         </div>
                     </div>
-
-                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                    </div>
-
-                </div>
-            </div>
-                    }
                 }
-            
+            }
+
         </div>
 
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Оперативная память:
+                    <h5>Оперативная память:</h5>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["OZUName"]
+                </div>
+                <div class="col-lg-1">
+                    <h5>@Session["OZUPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["ozuId"] == null || @Session["ozuId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["ozuId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -194,33 +255,33 @@
             </div>
         </div>
         <div class="container-fluid" id="OZUTable" runat="server" style="display:none">
-            
 
-                @foreach (var item in Model)
+
+            @foreach (var item in Model)
+            {
+                if (item.type == "ozu")
                 {
-                    if (item.type == "ozu")
-                    {
-            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="~/images/ozu.jpg" alt="..." width="100" height="100">
-                    </div>
-                    <div class="col-md-2">
-                        <div class="card-body">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/ozu.jpg" alt="..." width="100" height="100">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
+
                         </div>
                     </div>
-
-                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                    </div>
-
-                </div>
-            </div>
-                    }
                 }
+            }
 
         </div>
 
@@ -228,10 +289,24 @@
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Охлаждающая система:
+                    <h5>Охлаждающая система:</h5> 
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["KulerName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <h5>@Session["KulerPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["kulerId"] == null || @Session["kulerId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["kulerId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -251,43 +326,56 @@
             </div>
         </div>
         <div class="container-fluid" id="KulerTable" runat="server" style="display:none">
-            
 
-                @foreach (var item in Model)
+
+            @foreach (var item in Model)
+            {
+                if (item.type == "kuler")
                 {
-                    if (item.type == "kuler")
-                    {
-            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="~/images/kuler.jpg" alt="..." width="100" height="100">
-                    </div>
-                    <div class="col-md-2">
-                        <div class="card-body">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/kuler.jpg" alt="..." width="100" height="100">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
+
                         </div>
                     </div>
-
-                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                    </div>
-
-                </div>
-            </div>
-                    }
                 }
+            }
         </div>
 
 
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Корпус:
+                    <h5>Корпус:</h5>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["KorpusName"]
+                </div>
+                <div class="col-lg-1">
+                    <h5>@Session["KorpusPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["korpusId"] == null || @Session["korpusId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["korpusId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -307,43 +395,57 @@
             </div>
         </div>
         <div class="container-fluid" id="KorpusTable" runat="server" style="display:none">
-            
 
-                @foreach (var item in Model)
+
+            @foreach (var item in Model)
+            {
+                if (item.type == "korpus")
                 {
-                    if (item.type == "korpus")
-                    {
-            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="~/images/korpus.jpg" alt="..." width="100" height="100">
-                    </div>
-                    <div class="col-md-2">
-                        <div class="card-body">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/korpus.jpg" alt="..." width="100" height="100">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
+
                         </div>
                     </div>
-
-                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                    </div>
-
-                </div>
-            </div>
-                    }
                 }
+            }
         </div>
 
 
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Монитор:
+                    <h5>Монитор:</h5>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["MonitorName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <h5>@Session["MonitorPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["monitorId"] == null || @Session["monitorId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["monitorId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -363,43 +465,57 @@
             </div>
         </div>
         <div class="container-fluid" id="MonitorTable" runat="server" style="display:none">
-           
 
-                @foreach (var item in Model)
+
+            @foreach (var item in Model)
+            {
+                if (item.type == "monitor")
                 {
-                    if (item.type == "monitor")
-                    {
-            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="~/images/monitor.jpg" alt="..." width="100" height="100">
-                    </div>
-                    <div class="col-md-2">
-                        <div class="card-body">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/monitor.jpg" alt="..." width="100" height="100">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
+
                         </div>
                     </div>
-
-                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                    </div>
-
-                </div>
-            </div>
-                    }
                 }
+            }
         </div>
 
 
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Компьютерная мышь:
+                    <h5>Компьютерная мышь:</h5> 
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["MouseName"]
+                </div>
+
+                <div class="col-lg-1">
+                    <h5>@Session["MousePrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["mouseId"] == null || @Session["mouseId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["mouseId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -419,43 +535,56 @@
             </div>
         </div>
         <div class="container-fluid" id="MouseTable" runat="server" style="display:none">
-            
 
-                @foreach (var item in Model)
+
+            @foreach (var item in Model)
+            {
+                if (item.type == "mouse")
                 {
-                    if (item.type == "mouse")
-                    {
-            <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="~/images/mouse.jpg" alt="..." width="100" height="100">
-                    </div>
-                    <div class="col-md-2">
-                        <div class="card-body">
-                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                            <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/mouse.jpg" alt="..." width="100" height="100">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
+
                         </div>
                     </div>
-
-                    <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                        @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                    </div>
-
-                </div>
-            </div>
-                    }
                 }
-            
+            }
+
         </div>
 
-        <div class="container-fluid classAccessories" >
+        <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    Клавиатура:
+                    <h5>Клавиатура:</h5>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     @Session["KeyboardName"]
+                </div>
+                <div class="col-lg-1">
+                    <h5>@Session["KeyboardPrice"]</h5>
+                </div>
+
+                <div class="col-lg-1">
+                    @if (@Session["keyboardId"] == null || @Session["keyboardId"].ToString() == "")
+                    {
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Убрать", "deleteComplect", new { id = Session["keyboardId"] }, new { @class = "btn btn-primary", @style = "color:white" })
+                    }
                 </div>
 
                 <div class="col-lg-1">
@@ -477,49 +606,69 @@
         <div class="container-fluid" id="KeyboardTable" runat="server" style="display:none">
 
 
-                @foreach (var item in Model)
+            @foreach (var item in Model)
+            {
+                if (item.type == "keyboard")
                 {
-                    if (item.type == "keyboard")
-                    {
-                <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
-                    <div class="row g-0">
-                        <div class="col-md-2">
-                            <img src="~/images/keyboard.jpg" alt="..." width="100" height="100">
-                        </div>
-                        <div class="col-md-2">
-                            <div class="card-body">
-                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
-                                <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                    <div class="card mb-3" style="margin-top: 10px; margin-left: 100px; border-style: solid; border-color: lightgray; border-width: 2px; border-radius: 4px;">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <img src="~/images/keyboard.jpg" alt="..." width="100" height="100">
                             </div>
-                        </div>
+                            <div class="col-md-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.name)</h4>
+                                    <p class="card-text">Цена: @Html.DisplayFor(modelItem => item.price) руб.</p>
+                                </div>
+                            </div>
 
-                        <div class="col-md-8" style="text-align:end; margin-top:26px;">
-                            @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                            @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
-                        </div>
+                            <div class="col-md-8" style="text-align:end; margin-top:26px;">
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.id }, new { @class = "btn btn-primary compItem", @style = "color:white" })
+                                @Html.ActionLink("Добавить", "addComplect", new { id = item.id }, new { @class = "btn btn-primary ", @style = "color:white" })
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                    }
                 }
+            }
         </div>
 
 
-        
+        <div class="row">
+            <div class="col-lg-9" style="text-align: start;">
+                <h3>Общая сумма: @Session["ResultSum"]</h3>
+            </div>
+            <div class="col-lg-2" style="text-align: end;">
+                <h3>Заказать</h3>
+            </div>
+
+        </div>
     </div>
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
 
-    <script language="javascript">
-         function toggleText(id) {
-                document.getElementById(id).textContent = 'блаблаблабла';
-         }
-        document.getElementById('button').addEventListener('click', () => toggleText('p'));
+    @section scripts
+{
+        <script type="text/javascript">
 
-    </script>
-    
+            $(function () {
+                $.ajaxSetup({ cache: false });
+                $(".compItem").click(function (e) {
+
+                    e.preventDefault();
+                    $.get(this.href, function (data) {
+                        $('#dialogContent').html(data);
+                        $('#modDialog').modal('show');
+                    });
+                });
+            })
+        </script>
+    }
+
 </body>
 
 

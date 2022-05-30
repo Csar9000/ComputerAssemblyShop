@@ -4,47 +4,25 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>AccessoryTable</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.type)
-        </dt>
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Информация о товаре</h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>Название модели:</dt>
+            <dd>@Html.DisplayFor(model => model.name)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.type)
-        </dd>
+            <dt>Цена</dt>
+            <dd>@Html.DisplayFor(model => model.price)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
-
-    </dl>
+            <dt>Описание</dt>
+            <dd>@Html.DisplayFor(model => model.description)</dd>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
