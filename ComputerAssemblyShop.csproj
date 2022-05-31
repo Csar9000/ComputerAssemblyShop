@@ -128,11 +128,10 @@
     <Compile Include="AccessoryTable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="AccessoryTablesController.cs" />
+    <Compile Include="Controllers\AccessoryTablesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccessoryTablesCustomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +149,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -217,6 +219,8 @@
     <Content Include="Views\AccessoryTables\Contact.cshtml" />
     <Content Include="Views\AccessoryTables\Complectation.cshtml" />
     <Content Include="Views\AccessoryTables\Details.cshtml" />
+    <Content Include="Views\AccessoryTables\Create.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

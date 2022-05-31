@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="0e4993b0139f44eeb429b9ce87d0c679" Name="Diagram1">
         <EntityTypeShape EntityType="ComputerAssemblyModel.AccessoryTable" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerAssemblyModel.Orders" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

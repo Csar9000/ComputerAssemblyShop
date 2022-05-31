@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ComputerAssemblyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ComputerAssemblyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccessoryTable">
           <Key>
             <PropertyRef Name="id" />
@@ -13,13 +13,32 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="price" Type="int" Nullable="false" />
-          <Property Name="description" Type="nvarchar" MaxLength="100" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="processor" Type="nvarchar" MaxLength="100" />
+          <Property Name="videoCard" Type="nvarchar" MaxLength="100" />
+          <Property Name="disc" Type="nvarchar" MaxLength="100" />
+          <Property Name="korpus" Type="nvarchar" MaxLength="100" />
+          <Property Name="mouse" Type="nvarchar" MaxLength="100" />
+          <Property Name="ozu" Type="nvarchar" MaxLength="100" />
+          <Property Name="keyboard" Type="nvarchar" MaxLength="100" />
+          <Property Name="kuler" Type="nvarchar" MaxLength="100" />
+          <Property Name="date" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="Хранилище ComputerAssemblyModelContainer">
           <EntitySet Name="AccessoryTable" EntityType="Self.AccessoryTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ComputerAssemblyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -31,11 +50,31 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="price" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="ComputerAssemblyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccessoryTable" EntityType="Self.AccessoryTable" />
+          <EntitySet Name="Orders" EntityType="ComputerAssemblyModel.Orders" />
         </EntityContainer>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="processor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="videoCard" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="disc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="korpus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="mouse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ozu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="keyboard" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="kuler" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" Nullable="false" />
+          <Property Name="FIO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +89,26 @@
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ComputerAssemblyModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="kuler" ColumnName="kuler" />
+                <ScalarProperty Name="keyboard" ColumnName="keyboard" />
+                <ScalarProperty Name="ozu" ColumnName="ozu" />
+                <ScalarProperty Name="mouse" ColumnName="mouse" />
+                <ScalarProperty Name="korpus" ColumnName="korpus" />
+                <ScalarProperty Name="disc" ColumnName="disc" />
+                <ScalarProperty Name="videoCard" ColumnName="videoCard" />
+                <ScalarProperty Name="processor" ColumnName="processor" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

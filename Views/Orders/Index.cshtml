@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ComputerAssemblyShop.Orders>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.processor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.videoCard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.disc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.korpus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mouse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ozu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.keyboard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kuler)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.processor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.videoCard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.disc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.korpus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mouse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ozu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.keyboard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kuler)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

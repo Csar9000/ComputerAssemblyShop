@@ -21,6 +21,39 @@ namespace ComputerAssemblyShop
             return View(db.AccessoryTable.ToList());
         }
 
+        public ActionResult Create()
+        {
+            return PartialView();
+        }
+
+        public ActionResult CreateOrder([Bind(Include = "id,processor,videoCard,disc,korpus,mouse,ozu,keyboard,kuler,date,FIO,Address,PhoneNumber,price")] Orders orders,string Person,string PhoneNumber,string Address)
+        {
+            orders.processor = Session["ProcessorName"].ToString();
+            orders.videoCard = Session["VideoCardName"].ToString();
+            orders.disc = Session["DiskName"].ToString();
+            orders.korpus = Session["KorpusName"].ToString();
+            orders.mouse = Session["MouseName"].ToString();
+            orders.ozu = Session["OZUName"].ToString();
+            orders.keyboard = Session["KeyboardName"].ToString();
+            orders.kuler = Session["KulerName"].ToString();
+            orders.date = System.DateTime.Now.ToString();
+            orders.price = int.Parse(Session["ResultSum"].ToString());
+            orders.Address = "Ya";
+            orders.FIO = "Ya";
+            orders.PhoneNumber = "890567835334";
+
+
+
+            if (ModelState.IsValid)
+            {
+                db.Orders.Add(orders);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Complectation");
+        }
+
+
 
         public ActionResult addComplect(int? id)
         {
@@ -192,13 +225,9 @@ namespace ComputerAssemblyShop
             return RedirectToAction("Complectation");
         }
 
-
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-
             return View();
         }
 
@@ -216,86 +245,6 @@ namespace ComputerAssemblyShop
             if (accessoryTable != null)
                 return PartialView(accessoryTable);
             return HttpNotFound();
-        }
-
-        // GET: AccessoryTables/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: AccessoryTables/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,type,price,description")] AccessoryTable accessoryTable)
-        {
-            if (ModelState.IsValid)
-            {
-                db.AccessoryTable.Add(accessoryTable);
-                db.SaveChanges();
-                return RedirectToAction("Complectation");
-            }
-
-            return View(accessoryTable);
-        }
-
-        // GET: AccessoryTables/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccessoryTable accessoryTable = db.AccessoryTable.Find(id);
-            if (accessoryTable == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accessoryTable);
-        }
-
-        // POST: AccessoryTables/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,type,price,description")] AccessoryTable accessoryTable)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(accessoryTable).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Complectation");
-            }
-            return View(accessoryTable);
-        }
-
-        // GET: AccessoryTables/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccessoryTable accessoryTable = db.AccessoryTable.Find(id);
-            if (accessoryTable == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accessoryTable);
-        }
-
-        // POST: AccessoryTables/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            AccessoryTable accessoryTable = db.AccessoryTable.Find(id);
-            db.AccessoryTable.Remove(accessoryTable);
-            db.SaveChanges();
-            return RedirectToAction("Complectation");
         }
 
         protected override void Dispose(bool disposing)

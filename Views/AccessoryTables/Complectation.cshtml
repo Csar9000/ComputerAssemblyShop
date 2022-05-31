@@ -17,6 +17,11 @@
         <div id="dialogContent" class="modal-dialog"></div>
     </div>
 
+
+    <div id="modDialog2" class="modal fade">
+        <div id="dialogContent2" class="modal-dialog"></div>
+    </div>
+
     <div class="container">
 
         <h2>Комплектация</h2>
@@ -24,7 +29,7 @@
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                   <h5>Процессор:</h5>
+                    <h5>Процессор:</h5>
                 </div>
                 <div class="col-lg-7">
                     <h5> @Session["ProcessorName"]</h5>
@@ -92,7 +97,7 @@
                 <div class="col-lg-7">
                     @Session["VideoCardName"]
 
-                    
+
                 </div>
 
                 <div class="col-lg-1">
@@ -289,7 +294,7 @@
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    <h5>Охлаждающая система:</h5> 
+                    <h5>Охлаждающая система:</h5>
                 </div>
                 <div class="col-lg-7">
                     @Session["KulerName"]
@@ -498,7 +503,7 @@
         <div class="container-fluid classAccessories">
             <div class="row" style="border-width: 2px; border-style:solid; border-color:gray; border-radius:3px;">
                 <div class="col-lg-2">
-                    <h5>Компьютерная мышь:</h5> 
+                    <h5>Компьютерная мышь:</h5>
                 </div>
                 <div class="col-lg-7">
                     @Session["MouseName"]
@@ -639,7 +644,7 @@
                 <h3>Общая сумма: @Session["ResultSum"]</h3>
             </div>
             <div class="col-lg-2" style="text-align: end;">
-                <h3>Заказать</h3>
+                @Html.ActionLink("Заказать", "Create",null, new { @class = "btn btn-primary compItem2", @style = "color:white" })
             </div>
 
         </div>
@@ -663,6 +668,21 @@
                     $.get(this.href, function (data) {
                         $('#dialogContent').html(data);
                         $('#modDialog').modal('show');
+                    });
+                });
+            })
+        </script>
+
+        <script type="text/javascript">
+
+            $(function () {
+                $.ajaxSetup({ cache: false });
+                $(".compItem2").click(function (e) {
+
+                    e.preventDefault();
+                    $.get(this.href, function (data) {
+                        $('#dialogContent2').html(data);
+                        $('#modDialog2').modal('show');
                     });
                 });
             })
