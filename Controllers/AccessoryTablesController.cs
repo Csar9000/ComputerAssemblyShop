@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using ComputerAssemblyShop.Models;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace ComputerAssemblyShop
         // GET: AccessoryTables
         public ActionResult Index()
         {
-            return View(db.AccessoryTable.ToList());
+            return View(db.Orders.ToList());
         }
 
         public ActionResult Complectation()

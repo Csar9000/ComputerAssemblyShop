@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComputerAssemblyShop
+namespace ComputerAssemblyShop.Models
 {
     using System;
     using System.Data.Entity;
